@@ -1,17 +1,32 @@
 {
-  "name": "skyscraper-video",
+  "name": "blueprint-skyscraper",
   "version": "1.0.0",
+  "private": true,
+  "description": "Remotion videos: blueprint → skyscraper time-lapse and TAG AI marketing compositions",
   "scripts": {
-    "start": "npx remotion studio",
-    "render": "npx remotion render Skyscraper out/skyscraper.mp4"
+    "start": "remotion studio",
+    "render": "remotion render Skyscraper out/skyscraper.mp4",
+    "render:content-day": "remotion render ContentDay out/content-day.mp4",
+    "render:before-after": "remotion render BeforeAfter out/before-after.mp4",
+    "render:workflow": "remotion render WorkflowVisual out/workflow-visual.mp4",
+    "render:all": "npm run render && npm run render:content-day && npm run render:before-after && npm run render:workflow",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@remotion/cli": "^4.0.463",
-    "@remotion/renderer": "^4.0.463",
-    "@remotion/effects": "^4.0.463",
-    "@remotion/transitions": "^4.0.463",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "remotion": "^4.0.463"
+    "@remotion/cli": "4.0.484",
+    "@remotion/effects": "4.0.484",
+    "@remotion/renderer": "4.0.484",
+    "@remotion/transitions": "4.0.484",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.484"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.484",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "eslint": "^9.19.0",
+    "typescript": "^5.8.2"
   }
 }

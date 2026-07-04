@@ -1,4 +1,4 @@
 import { registerRoot } from "remotion";
-import { RemotionVideo } from "./Composition";
+import { RemotionRoot } from "./Root";
 
-registerRoot(RemotionVideo);
+registerRoot(RemotionRoot);

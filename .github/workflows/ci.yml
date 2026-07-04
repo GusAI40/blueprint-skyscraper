@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Smoke-render one frame of each composition
+        run: |
+          npx remotion still Skyscraper out/ci-skyscraper.png --frame=150
+          npx remotion still ContentDay out/ci-content-day.png --frame=30
+          npx remotion still BeforeAfter out/ci-before-after.png --frame=100
+          npx remotion still WorkflowVisual out/ci-workflow.png --frame=210
+
+      - name: Upload smoke frames
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-frames
+          path: out/*.png
