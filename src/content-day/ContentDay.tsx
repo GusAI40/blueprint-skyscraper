@@ -8,6 +8,7 @@ import {
 } from "remotion";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
+import { Drift } from "../fx";
 import { fontStack, monoStack } from "../theme";
 
 const BLUE = "#3B82F6";
@@ -27,6 +28,23 @@ const CameraShoot: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ background: "linear-gradient(135deg, #FBFAF7 0%, #F1EFEA 55%, #E9E6DF 100%)", fontFamily: fontStack }}>
+      <Drift from={1} to={1.05}>
+      {/* Studio floor */}
+      <div style={{
+        position: "absolute", bottom: 0, left: 0, right: 0, height: "22%",
+        background: "linear-gradient(0deg, rgba(31,41,55,0.08), transparent)",
+      }} />
+      {/* Grounding shadows */}
+      <div style={{
+        position: "absolute", left: "21%", bottom: "17%", width: 300, height: 34,
+        borderRadius: "50%", background: "radial-gradient(ellipse, rgba(31,41,55,0.16), transparent 70%)",
+        opacity: slide,
+      }} />
+      <div style={{
+        position: "absolute", left: "55%", bottom: "20%", width: 480, height: 44,
+        borderRadius: "50%", background: "radial-gradient(ellipse, rgba(31,41,55,0.14), transparent 70%)",
+        opacity: slide,
+      }} />
       {/* Key light beam */}
       <div style={{
         position: "absolute", top: -160, left: "16%",
@@ -147,6 +165,7 @@ const CameraShoot: React.FC = () => {
           Premium Content Capture
         </p>
       </div>
+      </Drift>
     </AbsoluteFill>
   );
 };
@@ -167,6 +186,7 @@ const WebsiteCards: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ background: "#FFFFFF", fontFamily: fontStack }}>
+      <Drift from={1.04} to={1}>
       {/* Dot grid backdrop */}
       <div style={{
         position: "absolute", inset: 0,
@@ -301,6 +321,7 @@ const WebsiteCards: React.FC = () => {
           One shoot → website, social, ads
         </p>
       </div>
+      </Drift>
     </AbsoluteFill>
   );
 };
@@ -318,6 +339,7 @@ const Premium: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F6F8FB 100%)", fontFamily: fontStack }}>
+      <Drift from={1} to={1.04}>
       {/* Accent strip */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 5,
@@ -397,6 +419,7 @@ const Premium: React.FC = () => {
           TAG AI · ubntag.com
         </p>
       </div>
+      </Drift>
     </AbsoluteFill>
   );
 };

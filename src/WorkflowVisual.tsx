@@ -6,7 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { DotGrid, Glow, Vignette } from "./fx";
+import { DotGrid, Drift, Glow, Vignette } from "./fx";
 import { fontStack, monoStack, palette } from "./theme";
 
 type Agent = {
@@ -36,7 +36,7 @@ const PACKET_STAGGER = 34; // frames between hops starting
 // Quadratic bézier helpers so packets ride exactly on the drawn curve.
 const controlPoint = (a: Agent, b: Agent): { cx: number; cy: number } => ({
   cx: (a.x + b.x) / 2,
-  cy: (a.y + b.y) / 2 + (a.y === b.y ? -70 : 0),
+  cy: (a.y + b.y) / 2 - 70,
 });
 
 const pointOnCurve = (a: Agent, b: Agent, t: number) => {
@@ -60,6 +60,7 @@ export const WorkflowVisual: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ background: `linear-gradient(180deg, ${palette.ink} 0%, #070D1C 60%, ${palette.ink} 100%)` }}>
+      <Drift from={1.035} to={1}>
       <DotGrid color="#4A6A9A" opacity={0.12} />
       <Glow x="50%" y="50%" size={1500} color="rgba(30,60,120,0.28)" />
       <Glow x="15%" y="20%" size={800} color="rgba(103,232,249,0.07)" />
@@ -252,6 +253,7 @@ export const WorkflowVisual: React.FC = () => {
           Five specialists. One pipeline. Zero dropped balls.
         </p>
       </div>
+      </Drift>
 
       <Vignette strength={0.5} />
     </AbsoluteFill>

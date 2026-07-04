@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@remotion/cli": "4.0.484",
-    "@remotion/effects": "4.0.484",
+    "@remotion/fonts": "4.0.484",
     "@remotion/renderer": "4.0.484",
     "@remotion/transitions": "4.0.484",
     "react": "18.3.1",

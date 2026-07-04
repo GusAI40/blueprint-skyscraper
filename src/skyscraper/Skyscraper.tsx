@@ -8,7 +8,7 @@ import {
 } from "remotion";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
-import { Glow, HudCorners, Starfield, Vignette } from "../fx";
+import { Drift, Glow, HudCorners, Starfield, Vignette } from "../fx";
 import { fontStack, monoStack, palette } from "../theme";
 
 const TOTAL_FLOORS = 40;
@@ -58,6 +58,7 @@ const Blueprint: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: palette.blueprintBg }}>
+      <Drift from={1} to={1.045}>
       <Glow x="20%" y="12%" size={900} color="rgba(30,144,255,0.14)" />
       <Glow x="85%" y="90%" size={1100} color="rgba(103,232,249,0.08)" />
 
@@ -159,6 +160,7 @@ const Blueprint: React.FC = () => {
           THE PINNACLE
         </div>
       </div>
+      </Drift>
 
       <Vignette strength={0.6} />
     </AbsoluteFill>
@@ -193,6 +195,7 @@ const Construction: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: palette.ink }}>
+      <Drift from={1.05} to={1}>
       <div style={{
         position: "absolute", inset: 0,
         background: `linear-gradient(180deg, ${skyTop} 0%, ${skyMid} 55%, ${skyLow} 100%)`,
@@ -311,8 +314,9 @@ const Construction: React.FC = () => {
         position: "absolute", bottom: 0, width: "100%", height: "14%",
         background: "linear-gradient(0deg, #070B14 30%, rgba(7,11,20,0.85) 60%, transparent 100%)",
       }} />
+      </Drift>
 
-      {/* Progress HUD */}
+      {/* Progress HUD — outside the drift so it stays locked to the frame */}
       <div style={{
         position: "absolute", bottom: 34, width: "100%",
         display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
@@ -359,6 +363,7 @@ const Completed: React.FC = () => {
     <AbsoluteFill style={{
       background: "linear-gradient(180deg, #150A2E 0%, #4A1A3E 38%, #C25A3E 68%, #F0A468 100%)",
     }}>
+      <Drift from={1} to={1.06}>
       {/* Sun with bloom */}
       <div style={{
         position: "absolute", top: sunY, left: "50%", transform: "translateX(-50%)",
@@ -408,11 +413,16 @@ const Completed: React.FC = () => {
               height: "2.5%",
               borderBottom: "1px solid rgba(255,255,255,0.07)",
               background: litBase < 0.45
-                ? `rgba(255,214,150,${0.05 + shimmer * 0.10})`
+                ? `rgba(255,214,150,${0.10 + shimmer * 0.18})`
                 : "rgba(255,255,255,0.03)",
             }} />
           );
         })}
+        {/* Sky reflection across the curtain wall */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(115deg, rgba(150,200,255,0.20) 0%, transparent 42%, rgba(14,22,44,0.30) 100%)",
+        }} />
         {/* Vertical mullions give the curtain wall its window grid */}
         <div style={{
           position: "absolute", inset: 0,
@@ -447,8 +457,9 @@ const Completed: React.FC = () => {
         border: "1.5px solid rgba(255,240,210,0.8)",
         opacity: glow * (1 - beaconPhase),
       }} />
+      </Drift>
 
-      {/* Title card */}
+      {/* Title card — locked to the frame */}
       <div style={{
         position: "absolute", bottom: 42, width: "100%", textAlign: "center",
         fontFamily: fontStack, opacity: glow,

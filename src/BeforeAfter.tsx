@@ -7,7 +7,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { Glow, Vignette } from "./fx";
+import { Drift, Glow, Vignette } from "./fx";
 import { fontStack, monoStack, palette } from "./theme";
 
 type Props = {
@@ -76,6 +76,7 @@ export const BeforeAfter: React.FC<Props> = ({
 
   return (
     <AbsoluteFill style={{ background: palette.ink, fontFamily: fontStack }}>
+      <Drift from={1} to={1.03}>
       {/* ------------------------------- BEFORE ------------------------------ */}
       <div style={{
         position: "absolute", left: 0, top: 0, width: "50%", height: "100%",
@@ -257,6 +258,7 @@ export const BeforeAfter: React.FC<Props> = ({
           TAG AI · ubntag.com
         </p>
       </div>
+      </Drift>
 
       <Vignette strength={0.4} />
     </AbsoluteFill>

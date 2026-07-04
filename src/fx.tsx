@@ -1,5 +1,28 @@
 import React from "react";
-import { random } from "remotion";
+import {
+  AbsoluteFill,
+  interpolate,
+  random,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
+
+// Slow scale drift that gives static scenes a "camera on a dolly" feel.
+// Wrap a scene's content; the scale runs over the scene's full duration.
+export const Drift: React.FC<{
+  from?: number;
+  to?: number;
+  children: React.ReactNode;
+}> = ({ from = 1, to = 1.05, children }) => {
+  const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
+  const scale = interpolate(frame, [0, durationInFrames], [from, to]);
+  return (
+    <AbsoluteFill style={{ transform: `scale(${scale})` }}>
+      {children}
+    </AbsoluteFill>
+  );
+};
 
 // Darkened-corner overlay for a cinematic look. A plain CSS radial
 // gradient renders identically in the studio, the player, and headless

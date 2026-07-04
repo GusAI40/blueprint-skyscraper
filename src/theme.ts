@@ -1,6 +1,24 @@
 // Shared design tokens. Every composition draws from this palette and
 // type system so the whole reel reads as one brand.
 
+import { loadFont } from "@remotion/fonts";
+import { staticFile } from "remotion";
+
+// Self-hosted variable fonts (public/fonts) — no network dependency at
+// render time, so every machine produces identical typography.
+loadFont({
+  family: "Inter",
+  url: staticFile("fonts/Inter-latin.woff2"),
+  weight: "400 900",
+  display: "block",
+});
+loadFont({
+  family: "JetBrains Mono",
+  url: staticFile("fonts/JetBrainsMono-latin.woff2"),
+  weight: "400 700",
+  display: "block",
+});
+
 export const palette = {
   ink: "#04060C",
   night: "#070B16",

@@ -49,16 +49,20 @@ one frame from each composition on every push/PR.
 ## Project structure
 
 ```
+public/fonts/              # self-hosted Inter + JetBrains Mono (variable woff2)
 src/
   index.ts                 # registerRoot entry point (see remotion.config.ts)
   Root.tsx                 # all <Composition> registrations
-  theme.ts                 # shared palette + typography tokens
-  fx.tsx                   # reusable effects (Vignette, Glow, Starfield, …)
+  theme.ts                 # shared palette + typography tokens, font loading
+  fx.tsx                   # reusable effects (Vignette, Glow, Starfield, Drift, …)
   skyscraper/Skyscraper.tsx
   content-day/ContentDay.tsx
   BeforeAfter.tsx
   WorkflowVisual.tsx
 ```
+
+Fonts are self-hosted via `@remotion/fonts` + `staticFile()` — renders never
+depend on an external CDN.
 
 ### Animation ground rules
 
